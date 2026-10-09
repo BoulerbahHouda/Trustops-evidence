@@ -1,0 +1,9 @@
+# Dataset: not redistributed (download from UNSW, see README)
+data/*.csv
+
+# Generated files
+out/
+__pycache__/
+*.o
+*.so
+.DS_Store
