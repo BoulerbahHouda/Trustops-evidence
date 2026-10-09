@@ -117,6 +117,12 @@ def main():
             sys.exit("give --train and --test (UNSW-NB15 CSVs), or --synthetic")
         Xtr, ytr, Xte, yte, cats, feats, info = load_unsw(a.train, a.test)
 
+    # scikit-learn casts inputs to float32 before comparing them with split
+    # thresholds; compiled code compares float64. Rounding all inputs to
+    # float32 once makes both paths see exactly the same values.
+    Xtr = Xtr.astype(np.float32).astype(np.float64)
+    Xte = Xte.astype(np.float32).astype(np.float64)
+
     from sklearn.ensemble import RandomForestClassifier
     from sklearn.metrics import accuracy_score, f1_score
 

@@ -1,0 +1,12 @@
+attack,attacker,region,ed25519-record,fs-hmac,fssagg-mac,sha256-chain
+backdate-model-version,storage,anchored,1,1,1,1
+delete-record,storage,anchored,1,1,1,1
+delete-record,storage,unanchored,1,1,1,0
+forge-record,auditor-with-K0,unanchored,1,0,0,0
+insert-backdated-model-update,storage,unanchored,1,1,1,0
+modify-decision,storage,anchored,1,1,1,1
+modify-decision,storage,unanchored,1,1,1,0
+reorder-records,storage,unanchored,1,1,1,0
+rewrite-suffix,node-compromise,unanchored,0,1,1,0
+truncate-tail,node-compromise,unanchored,0,0,1,0
+truncate-tail,storage,unanchored,0,0,1,0

@@ -67,3 +67,24 @@ signed with Ed25519 and sent over a socket.
   representative of flash storage, and no power-cut test is performed.
 - Key erasure with `explicit_bzero` removes the key from the buffers the
   code controls; it does not cover copies in registers, swap or the VM.
+
+## Results of the reported campaign
+
+`results/SUPPLEMENT.md` contains the full statistics behind the paper's
+tables: median, interquartile range, bootstrap 95% CI and mean for every
+operation and configuration (25, 100 and 200 trees), end-to-end p50, p99,
+p99.9 and maximum, the cost of the periodic (flush + anchor) decisions,
+record sizes, verification cost, tamper-detection outcomes and drift
+results. `results/summary/*.csv` holds the same data in machine-readable
+form. Raw per-decision timings (about 240 MB) are not committed; rerunning
+`run_campaign.sh` regenerates them.
+
+Notes on the method:
+* All inputs are rounded once to float32 before training, the precision at
+  which scikit-learn compares features with split thresholds, so the
+  compiled forest and scikit-learn see identical values (parity check in
+  `bench_meta.json`).
+* Drift monitor: per-feature EWMA with alpha = 0.02; states ok / warn /
+  drift at tau/2 and tau; `drift` maps to the response `throttle`.
+* Percentiles use linear interpolation (numpy.percentile / pandas.quantile
+  defaults).
