@@ -1,4 +1,4 @@
-# TrustOps benchmark v3
+# TrustOps-Evidence benchmark
 
 Measures the per-decision cost of auditability by evidence level, with a
 **compiled** inference path and a **compiled** evidence pipeline, on the
