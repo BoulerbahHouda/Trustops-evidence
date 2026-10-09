@@ -1,0 +1,10 @@
+# Model preparation image (linux/amd64, runs under emulation on Apple
+# silicon): tl2cgen, which compiles the forest to C source, ships no ARM64
+# wheel. It only generates portable C source; that source is compiled and
+# measured in the ARM64 image (Dockerfile).
+FROM python:3.12-slim
+RUN pip install --no-cache-dir \
+        numpy==2.5.3 pandas==3.0.5 scikit-learn==1.9.1 \
+        treelite==4.7.2 tl2cgen==1.0.0
+WORKDIR /bench
+COPY prepare.py build_and_run.sh ./
